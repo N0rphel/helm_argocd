@@ -4,7 +4,12 @@ service-a:
     repository: nginx
     tag: stable
   serviceAccount:
-    create: true  # Add this to fix the nil pointer
+    create: true
+  ingress:
+    enabled: false    # add this
+    annotations: {}
+    hosts: []
+    tls: []
 
 service-b:
   replicaCount: 2
@@ -12,5 +17,10 @@ service-b:
     repository: nginx
     tag: mainline
   serviceAccount:
-    create: true  # Add this to fix the nil pointer
+    create: true
+  ingress:
+    enabled: false    # add this
+    annotations: {}
+    hosts: []
+    tls: []
 
