@@ -1,10 +1,16 @@
 service-a:
   replicaCount: 2
   image:
-    tag: "latest"
+    repository: nginx
+    tag: stable
+  serviceAccount:
+    create: true  # Add this to fix the nil pointer
 
 service-b:
   replicaCount: 2
   image:
-    tag: "latest"
+    repository: nginx
+    tag: mainline
+  serviceAccount:
+    create: true  # Add this to fix the nil pointer
 
