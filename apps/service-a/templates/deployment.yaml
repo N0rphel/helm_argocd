@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include "service-a.fullname" . } }
+  labels: { { - include "service-a.labels" . | nindent 4 } }
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels: { { - include "service-a.selectorLabels" . | nindent 6 } }
+  template:
+    metadata:
+      labels: { { - include "service-a.selectorLabels" . | nindent 8 } }
+    spec:
+      containers:
+        - name: { { .Chart.Name } }
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          ports:
+            - containerPort: { { .Values.service.port } }
