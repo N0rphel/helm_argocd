@@ -1,26 +1,106 @@
+# =====================================
+# Umbrella Chart Values (Future-Proof)
+# =====================================
+
+# --------------------
+# Service A
+# --------------------
 service-a:
   replicaCount: 2
   image:
     repository: nginx
     tag: stable
+    pullPolicy: IfNotPresent
+
+  # Safe default for ServiceAccount
   serviceAccount:
     create: true
+    automount: true
+    name: ""
+    annotations: {}
+
+  # Safe default for Ingress
   ingress:
-    enabled: false    # add this
+    enabled: false
+    className: ""
     annotations: {}
     hosts: []
     tls: []
 
+  # Safe default for HTTPRoute (Gateway API)
+  httpRoute:
+    enabled: false
+    annotations: {}
+    parentRefs: []
+    hostnames: []
+    rules: []
+
+  # Resources
+  resources: {}
+
+  # Autoscaling
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+
+  # Liveness & Readiness
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+# --------------------
+# Service B
+# --------------------
 service-b:
   replicaCount: 2
   image:
     repository: nginx
     tag: mainline
+    pullPolicy: IfNotPresent
+
   serviceAccount:
     create: true
+    automount: true
+    name: ""
+    annotations: {}
+
   ingress:
-    enabled: false    # add this
+    enabled: false
+    className: ""
     annotations: {}
     hosts: []
     tls: []
+
+  httpRoute:
+    enabled: false
+    annotations: {}
+    parentRefs: []
+    hostnames: []
+    rules: []
+
+  resources: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
 
