@@ -1,0 +1,10 @@
+service-a:
+  replicaCount: 2
+  image:
+    tag: "latest"
+
+service-b:
+  replicaCount: 2
+  image:
+    tag: "latest"
+

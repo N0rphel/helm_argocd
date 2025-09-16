@@ -1,12 +1,11 @@
 replicaCount: 1
 
 image:
-  repository: redis
-  tag: "7"
+  repository: nginx
   pullPolicy: IfNotPresent
+  tag: "stable"  # default tag
 
 service:
   type: ClusterIP
-  port: 6379
+  port: 80
 
-resources: {}
